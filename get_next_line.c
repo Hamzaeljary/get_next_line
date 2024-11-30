@@ -6,13 +6,13 @@
 /*   By: heljary <heljary@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 12:03:35 by heljary           #+#    #+#             */
-/*   Updated: 2024/11/28 10:44:31 by heljary          ###   ########.fr       */
+/*   Updated: 2024/11/30 10:18:24 by heljary          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char *rd_line(int fd, char *line)
+char *rd_line(int fd, char *line)
 {
     char *buffer;
     char *temp;
@@ -23,6 +23,8 @@ static char *rd_line(int fd, char *line)
     {
         return (NULL);
     }
+    if (!line)
+        line = ft_strdup(""); 
     while(!ft_strchr(line,'\n') && (rd =read(fd, buffer, BUFFER_SIZE)) > 0)
     {
         buffer[rd] = '\0';
@@ -30,6 +32,7 @@ static char *rd_line(int fd, char *line)
         line = ft_strjoin(line, buffer); 
         free(temp);
     }
+    
     free(buffer);
     if (rd < 0)
         return (NULL);
@@ -37,7 +40,7 @@ static char *rd_line(int fd, char *line)
 }
 
 
-char    *get_next_line(int fd)
-{
+// char    *get_next_line(int fd)
+// {
     
-}
+// }
