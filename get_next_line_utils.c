@@ -6,14 +6,13 @@
 /*   By: heljary <heljary@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 12:04:19 by heljary           #+#    #+#             */
-/*   Updated: 2024/11/30 10:07:23 by heljary          ###   ########.fr       */
+/*   Updated: 2024/12/02 18:27:44 by heljary          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "get_next_line.h"
 
-static size_t	ft_strlen(const char *str)
+size_t	ft_strlen(const char *str)
 {
 	int	len;
 
@@ -25,43 +24,31 @@ static size_t	ft_strlen(const char *str)
 	return (len);
 }
 
-static void	*ft_memcpy(void *dst, const void *src, size_t n)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	size_t				i;
-	unsigned char		*d;
-	const unsigned char	*s;
-
-	d = (unsigned char *)dst;
-	s = (const unsigned char *)src;
-	i = 0;
-	if (!src && !dst)
-		return (NULL);
-	while (i < n)
-	{
-		d[i] = s[i];
-		i++;
-	}
-	return (dst);
-}
-
-
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	char	*result;
-	size_t	len1;
-	size_t	len2;
+	char	*str;
+	size_t	i;
+	size_t	j;
 
 	if (!s1 || !s2)
 		return (NULL);
-	len1 = ft_strlen(s1);
-	len2 = ft_strlen(s2);
-	result = malloc(sizeof(char) * (len1 + len2 + 1));
-	if (!result)
+	str = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!str)
 		return (NULL);
-	ft_memcpy(result, s1, len1);
-	ft_memcpy(result + len1, s2, len2);
-	result[len1 + len2] = '\0';
-	return (result);
+	i = 0;
+	while (s1[i])
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	j = 0;
+	while (s2[j])
+	{
+		str[i + j] = s2[j];
+		j++;
+	}
+	str[i + j] = '\0';
+	return (str);
 }
 
 char	*ft_substr(const char *s, unsigned int start, size_t len)

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: heljary <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: heljary <heljary@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/28 09:33:40 by heljary           #+#    #+#              #
-#    Updated: 2024/11/28 09:33:43 by heljary          ###   ########.fr        #
+#    Updated: 2024/12/02 17:15:36 by heljary          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,6 @@ CFLAGS = -Wall -Wextra -Werror
 SRC = get_next_line.c get_next_line_utils.c
 
 # BONUS = ft_lstnew_bonus.c \
-
 
 OBJ = $(SRC:.c=.o)
 # BONUS_OBJ = $(BONUS:.c=.o)
@@ -41,5 +40,3 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-
-.PHONY: all clean fclean re
