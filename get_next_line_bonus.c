@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: heljary <heljary@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 12:03:35 by heljary           #+#    #+#             */
-/*   Updated: 2024/12/04 15:00:55 by heljary          ###   ########.fr       */
+/*   Updated: 2024/12/04 22:32:28 by heljary          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static char	*rd_line(int fd, char *str, char *buffer)
 {
@@ -63,23 +63,23 @@ static char	*rm_line(char *line)
 
 char	*get_next_line(int fd)
 {
-	static char		*str;
+	static char		*str[1024];
 	char			*buffer;
 	char			*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd >= 1024 || BUFFER_SIZE <= 0)
 		return (NULL);
 	buffer = (char *)malloc((size_t)BUFFER_SIZE + 1);
 	if (!buffer)
 		return (NULL);
-	line = rd_line(fd, str, buffer);
+	line = rd_line(fd, str[fd], buffer);
 	free(buffer);
 	if (!line)
 	{
-		free(str);
-		str = NULL;
+		free(str[fd]);
+		str[fd] = NULL;
 		return (NULL);
 	}
-	str = rm_line(line);
+	str[fd] = rm_line(line);
 	return (line);
 }
