@@ -6,7 +6,7 @@
 /*   By: heljary <heljary@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 12:03:58 by heljary           #+#    #+#             */
-/*   Updated: 2024/12/04 22:29:07 by heljary          ###   ########.fr       */
+/*   Updated: 2024/12/09 12:14:15 by heljary          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 0
 # endif
 
 char	*get_next_line(int fd);

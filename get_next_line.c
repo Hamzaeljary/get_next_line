@@ -6,7 +6,7 @@
 /*   By: heljary <heljary@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 12:03:35 by heljary           #+#    #+#             */
-/*   Updated: 2024/12/04 15:00:55 by heljary          ###   ########.fr       */
+/*   Updated: 2024/12/10 10:46:02 by heljary          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,25 @@
 
 static char	*rd_line(int fd, char *str, char *buffer)
 {
-	ssize_t	b_read;
+	ssize_t	nbytes;
 	char	*temp;
-
-	b_read = read(fd, buffer, BUFFER_SIZE);
-	while (b_read > 0)
+	
+	nbytes = read(fd, buffer, BUFFER_SIZE);//2 
+	while (nbytes > 0)
 	{
-		buffer[b_read] = '\0';
+		buffer[nbytes] = '\0';
 		if (!str)
 			str = ft_strdup("");
-		temp = ft_strjoin(str, buffer);
+		temp = ft_strjoin(str, buffer);//temp =hall
 		free(str);
 		if (!temp)
 			return (NULL);
 		str = temp;
 		if (ft_strchr(str, '\n'))
 			break ;
-		b_read = read(fd, buffer, BUFFER_SIZE);
+		nbytes = read(fd, buffer, BUFFER_SIZE);//2
 	}
-	if (b_read < 0)
+	if (nbytes < 0)
 	{
 		free(str);
 		str = NULL;
@@ -41,14 +41,14 @@ static char	*rd_line(int fd, char *str, char *buffer)
 	return (str);
 }
 
-static char	*rm_line(char *line)
+static char	*find_newline(char *line)
 {
 	int		i;
 	char	*remainder;
 
 	i = 0;
 	while (line[i] != '\n' && line[i] != '\0')
-		i++;
+		i++; //5
 	if (line[i] == '\0')
 		return (NULL);
 	remainder = ft_strdup(line + i + 1);
@@ -59,6 +59,7 @@ static char	*rm_line(char *line)
 	}
 	line[i + 1] = '\0';
 	return (remainder);
+	
 }
 
 char	*get_next_line(int fd)
@@ -68,7 +69,7 @@ char	*get_next_line(int fd)
 	char			*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
+		return (NULL); 
 	buffer = (char *)malloc((size_t)BUFFER_SIZE + 1);
 	if (!buffer)
 		return (NULL);
@@ -80,6 +81,6 @@ char	*get_next_line(int fd)
 		str = NULL;
 		return (NULL);
 	}
-	str = rm_line(line);
+	str = find_newline(line);
 	return (line);
 }
